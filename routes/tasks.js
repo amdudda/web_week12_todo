@@ -28,9 +28,9 @@ router.param("task_id", function(req, res, next, taskId) {
   * */
 router.get("/", function(req, res, next) {
 
-	req.db.tasks.find({
-		completed : false
-	}).toArray(function(error, tasklist){
+	req.db.tasks.find(
+		//{completed : false}
+	).toArray(function(error, tasklist){
 		if (error) {
 			return next(error);
 		}
@@ -93,11 +93,12 @@ router.post("/:task_id", function(req, res, next) {
 
 // set ALL tasks to completed, then display empty task list
 router.post("/alldone", function(req, res, next) {
-
+	
 	req.db.tasks.updateMany(
-		{ completed : false },
+		{completed: false },
 		{ $set : { completed: true } },
 		function (error, count) {
+			
 			if (error) {
 				console.log("error " + error );
 				return next(error);

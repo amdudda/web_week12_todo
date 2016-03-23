@@ -14,7 +14,10 @@ block content
 		div.item(id=task._id)
 			// a done button, the task name, and delete button
 			.done_form
-				form(action="/tasks/#{task._id}", method="post")
+				form(action="tasks/#{task._id}", method="post")
+					input(type="hidden", value=task._id, name=_id)
+					input(type="hidden", value="true", name="completed")
+					input.done_button(type="submit", class="task-done", value="done")
 			.task_number
 				span.number=index+1
 			.task_name
