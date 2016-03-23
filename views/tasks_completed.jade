@@ -1,0 +1,16 @@
+extends layout
+
+block content
+
+	.completed_list
+
+		if tasks
+			each task, index in tasks
+				.item
+					div.task_number
+						span = index+1
+						|.&nbsp;
+					div.task_name.completed-task
+						span.name=task.name
+		else
+			p No completed tasks!
