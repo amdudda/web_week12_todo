@@ -4,9 +4,12 @@ var favicon = require('serve-favicon');
 var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
+/*
 var MongoClient = require('mongodb').MongoClient;
 var ObjectID = require('mongodb').ObjectID;
 const assert = require('assert');
+*/
+var mongoose = require('mongoose');
 
 var index = require('./routes/index');
 var tasks = require('./routes/tasks');
@@ -31,28 +34,15 @@ app.use(express.static(path.join(__dirname, 'public')));
 // DB connection string
 var url="mongodb://localhost:27017/todo";
 
-MongoClient.connect(url, function(err,db) {
-	if (err) {
-		console.log("Error connecting to Mongo server: ", err);
-		assert(!err);	// crash app if error happens
-	}
+var db = mongoose.connect(url);
 
-	console.log("DB connection established.");
+mongoose.connection.on('error', function(err) {
+	console.log("Error connection to MongoDB via Mongoose: " + err);
+});
 
-	// Export DB object to all middleware, so routes can 
-	// perform DB operations without having to specify a path.
- 
+mongoose.connection.once("open", function() {
 
-
-	// This function adds a property called 'db', and sets
-	// db.tasks to db.collection('tasks').  This lets all routes
-	// access the DB at req.db.tasks
-	app.use(function(req, res, next) {
-		req.db = {};
-		req.db.tasks = db.collection('tasks');
-		next();  // this lets us specify callbacks to handle data retrieved
-	});
-
+	console.log("MongoDB connection established via Mongoose.");
 
 	// set up routes, middleware, error handlers
 	app.use('/', index);
