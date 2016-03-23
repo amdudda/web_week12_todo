@@ -17,6 +17,7 @@ router.param("task_id", function(req, res, next, taskId) {
 			return next(new Error(task.length + "tasks found, should be 1."));
 		}
 		req.task = task[0];
+		console.log(req.task);
 		return next();
 
 	});
@@ -108,11 +109,14 @@ router.post("/alldone", function(req, res, next) {
 // delete a task
 // delete task with taskId from database, using AJAX
 router.delete("/:task_id", function(req, res, next) {
-	
+	console.log("hi!");
 	req.db.tasks.remove({ _id: ObjectID(req.task._id)}, function(error, result){
+		console.log("attempting to delete: " + req.task._id);
 		if (error) {
 			return next(error);
 		}
 		res.sendStatus(200); // send success to AJAX call
 	});
 });
+
+module.exports = router;

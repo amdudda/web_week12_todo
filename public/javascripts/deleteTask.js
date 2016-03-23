@@ -1,6 +1,6 @@
 $(document).ready(function(){
 
-	$('button.delete_task).click(function(){
+	$('button.delete_task').click(function(){
 
 		var taskID = $(this).attr("task_id");
 		var deleteURL = "/tasks/" + taskID;

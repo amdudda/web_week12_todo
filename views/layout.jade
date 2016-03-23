@@ -1,15 +1,14 @@
 doctype html
 html
-  head
-    title= title + " | " + appname
-    link(rel='stylesheet', href='/stylesheets/style.css')
+	head
+		title= title + " | " + appname
+		link(rel='stylesheet', href='/stylesheets/style.css', type="text/css")
+		script(src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js")
+		script(src="/javascripts/deleteTask.js")
 
-	script(src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js")
-	script(src="/javascripts/deleteTask.js")
+	body
+		h2 TO DO APP
 
-  body
-	h2 TO DO APP
+		include navigation
 
-	include navigation
-
-    block content
+		block content

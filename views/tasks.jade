@@ -11,14 +11,14 @@ block content
 		p No tasks.
 
 	each task, index in tasks
-		div item(id=task._id)
+		div.item(id=task._id)
 			// a done button, the task name, and delete button
 			.done_form
 				form(action="/tasks/#{task._id}", method="post")
 			.task_number
-				span.number = index+1
+				span.number=index+1
 			.task_name
-				span.name = task.name
+				span.name=task.name
 			.delete_button
 				button.delete_task(task_id=task._id) Delete
 
