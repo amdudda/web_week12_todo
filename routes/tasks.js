@@ -110,7 +110,8 @@ router.post("/alldone", function(req, res, next) {
 // delete task with taskId from database, using AJAX
 router.delete("/:task_id", function(req, res, next) {
 	console.log("deleting task...");
-	req.db.tasks.remove({ _id: ObjectID(req.task_id)}, function(error, result){
+	// changing the next line to have "req.task_id" doesn't fix it.
+	req.db.tasks.remove({ _id: ObjectID(req.task._id)}, function(error, result){
 		console.log("attempting to delete: " + req.task_id);
 		if (error) {
 			return next(error);
