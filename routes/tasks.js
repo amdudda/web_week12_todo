@@ -8,7 +8,7 @@ var ObjectID = require('mongodb').ObjectID;
 router.param("task_id", function(req, res, next, taskId) {
 	console.log("parms being extracted from URL for " + taskId);
 	// request the task matching this ID, limit to one result
-	request.db.tasks.find( {_id : ObjectID(taskId) }).limit(1).toArray(function(error, task) {
+	req.db.tasks.find( {_id : ObjectID(taskId) }).limit(1).toArray(function(error, task) {
 		if (error) {
 			console.log("parm error " + error);
 			return next(error);
