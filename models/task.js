@@ -5,7 +5,8 @@ var Schema = mongoose.Schema;
 // String, Number, Date, Boolean...
 var taskSchema = new Schema({
 	name: String,
-	completed: Boolean
+	completed: Boolean,
+	user_id: String		// the user id of the user associated with a task
 });
 
 // compile into a Mongoose model
