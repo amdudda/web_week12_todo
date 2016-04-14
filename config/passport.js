@@ -71,14 +71,16 @@ module.exports = function(passport) {
 
         //Check to see if there is already a user with that username
         if (user) {
-          console.log('user with that name exists');
+          console.log('user with that user id exists');
           return done(null, false, req.flash('signupMessage', 'Sorry, username already taken'));
         }
 
         //else, the username is available. Create a new user, and save to DB.
         var newUser = new User();
+		newUser.fullname = req.body.fullname;
         newUser.local.username = username;
         newUser.local.password = newUser.generateHash(password);
+		newUser.tasks = [];  // empty, we assume new user has no tasks yet!
 
         newUser.save(function (err) {
           if (err) {

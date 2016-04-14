@@ -9,7 +9,10 @@ block content
         p=message
 
     form(action='/signup' method='post')
-        label username
+        label User Name (your name)
+        input(type='text' name='fullname' required)
+        br
+        label User ID (your login ID)
         input(type='text' name='username' required)
         br
         label password

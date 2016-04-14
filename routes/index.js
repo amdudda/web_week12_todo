@@ -22,7 +22,7 @@ router.get('/signup', function(req, res, next) {
  * -- whether to display flash messages to user
  */
 router.post('/signup', passport.authenticate('local-signup', {
-	successRedirect: '/secret',
+	successRedirect: '/tasks',
 	failureRedirect: '/signup',
 	failureFlash: true
 }));
@@ -32,7 +32,7 @@ router.post('/signup', passport.authenticate('local-signup', {
  */
 router.post('/login', passport.authenticate('local-login', {
 	successRedirect: '/tasks',
-	failureRedirect: '/login',
+	failureRedirect: '/',
 	failureFlash: true
 }));
 
@@ -42,7 +42,7 @@ router.get('/logout', function(req, res, next) {
 	res.redirect('/');  // then send user back to homepage.
 });
 
-/* save user data to database via POST */
+/* save user data to database via POST -- do I need this?
 router.post('/saveSecretInfo', isLoggedIn, function(req,res,next){
 	// make sure to update only data user has entered info for
 	var newData = {};
@@ -68,6 +68,7 @@ router.post('/saveSecretInfo', isLoggedIn, function(req,res,next){
 		res.redirect('/secret');
 	});
 });
+*/
 
 /*
  * Middleware function to verify user is logged in and authorized.

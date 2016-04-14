@@ -1,27 +1,25 @@
 var mongoose = require('mongoose');
 var Schema = mongoose.Schema;
 var bcrypt = require('bcrypt-nodejs');  // lets me hash user passwords
-var Task = require('task.js');
+var Task = require('./task.js');
 
 // my user schema
 var userSchema = new Schema({
-	username: String,  // friendly name, eg "bob"
+	fullname: String,  // friendly name, eg "bob"
 	local : {
-		userid: {
+		username: {
 			type: String,
 			required: true,
 			unique: true
 		},
 		password: String
-	}
-
+	},
 	signUpDate : { 
 		type: Date,
 		default: Date.now() 
 	},
 
-	tasks: { [Task] }
-
+	tasks: [Task]
 });
 
 // copypasta from favecolors exercise in class
