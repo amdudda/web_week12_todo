@@ -63,6 +63,20 @@ router.get("/completed", isLoggedIn, function(req, res, next) {
 	});
 });
 
+// set ALL user's tasks to completed, then display empty task list
+router.post("/alldone", isLoggedIn, function(req, res, next) {
+	var userid = req.user.local.username;
+	console.log(userid);
+	Task.update( {completed: false, 'user_id': userid}, {completed: true}, {multi: true }, function (error, count) {
+		if (error) {
+			console.log("error " + error );
+			return next(error);
+		}
+		res.redirect("/tasks");
+	});
+});
+
+
 /* work with route parameters to provide task objects */
 router.param("task_id", function(req, res, next, taskId) {
 
@@ -94,18 +108,6 @@ router.post("/:task_id", function(req, res, next) {
 	});
 });
 
-// set ALL user's tasks to completed, then display empty task list
-router.post("/alldone", isLoggedIn, function(req, res, next) {
-	var userid = req.user.local.username;
-	console.log(userid);
-	Task.update( {completed: false, 'user_id': userid}, {completed: true}, {multi: true }, function (error, count) {
-		if (error) {
-			console.log("error " + error );
-			return next(error);
-		}
-		res.redirect("/tasks");
-	});
-});
 
 // delete a task
 // delete task with taskId from database, using AJAX
