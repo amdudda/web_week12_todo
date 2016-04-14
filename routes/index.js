@@ -42,34 +42,6 @@ router.get('/logout', function(req, res, next) {
 	res.redirect('/');  // then send user back to homepage.
 });
 
-/* save user data to database via POST -- do I need this?
-router.post('/saveSecretInfo', isLoggedIn, function(req,res,next){
-	// make sure to update only data user has entered info for
-	var newData = {};
-	if (req.body.favoriteColor != '') {
-		newData.favoriteColor = req.body.favoriteColor;
-	}
-	if (req.body.luckyNumber != '') {
-		newData.luckyNumber = req.body.luckyNumber;
-	}
-
-	// and update user's data in database
-	req.user.update(newData, function(err) {
-		if (err) {
-			console.log('error: ' + err); 
-			req.flash('updateMsg', 'Error updating');
-		}
-		else {
-			console.log('updated a record!');
-			req.flash('updateMsg', 'Updated data');
-		}
-
-		// redirect back to secret page
-		res.redirect('/secret');
-	});
-});
-*/
-
 /*
  * Middleware function to verify user is logged in and authorized.
  * sends user back to homepage on failure.

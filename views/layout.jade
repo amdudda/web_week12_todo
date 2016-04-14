@@ -7,8 +7,15 @@ html
 		script(src="/javascripts/deleteTask.js")
 
 	body
-		h2 TO DO APP
+		h2 
+			if user
+				span #{user.fullname}'s&nbsp;
+			span TO DO APP
+		if user
+			h3 (Your username is: #{user.local.username})
 
 		include navigation
 
 		block content
+
+		a(href="/logout") Log Out
