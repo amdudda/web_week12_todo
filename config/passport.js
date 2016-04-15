@@ -62,7 +62,7 @@ module.exports = function(passport) {
     //https://nodejs.org/api/process.html#process_process_nexttick_callback_arg
     //Once the current event loop turn runs to completion, call the callback function.
     process.nextTick(function () {
-
+	
       //Search for user with this username.
       User.findOne({'local.username': username}, function (err, user) {
         if (err) {
@@ -81,9 +81,13 @@ module.exports = function(passport) {
         newUser.local.username = username;
         newUser.local.password = newUser.generateHash(password);
 		newUser.tasks = [];  // empty, we assume new user has no tasks yet!
+		console.log(JSON.stringify(newUser));		
 
-        newUser.save(function (err) {
+		newUser.save(function (err) {
+			console.log("newuser 2:");
+			console.log(JSON.stringify(newUser));
           if (err) {
+			console.log("error happens here");
             throw err;
           }
           //If new user is saved successfully, all went well. Return new user object.
